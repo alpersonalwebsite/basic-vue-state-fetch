@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>List of Users:x {{users.length}}</h2>
+    <h2>List of Users: {{users.length}}</h2>
     <User
       v-for="user in users"
       v-bind:user="user"
