@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    Hello {{users.length}}
+    <UserList v-bind:users="users" />
   </div>
 </template>
 
@@ -8,12 +8,12 @@
 import axios from 'axios'
 import { API, limitQuery, limitUserResults } from './apiConfiguration'
 
-//import HelloWorld from './components/HelloWorld.vue'
+import UserList from './components/UserList.vue'
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    
+    UserList
   },
   data() {
     return {
@@ -25,10 +25,10 @@ export default {
   },
   methods: {
     fetchUsers() {
-      console.log('Fetching users!')
+      //console.log('Fetching users!')
       axios.get(`${API}?${limitQuery}${limitUserResults}`)
         .then(res => {
-          console.log(res)
+          //console.log(res)
           this.users = res.data
         })
     }
