@@ -1,18 +1,38 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    Hello {{users.length}}
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios'
+import { API, limitQuery, limitUserResults } from './apiConfiguration'
+
+//import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
-  }
+    
+  },
+  data() {
+    return {
+      users: []
+    }
+  },
+  mounted() {
+    this.fetchUsers()
+  },
+  methods: {
+    fetchUsers() {
+      console.log('Fetching users!')
+      axios.get(`${API}?${limitQuery}${limitUserResults}`)
+        .then(res => {
+          console.log(res)
+          this.users = res.data
+        })
+    }
+  },
 }
 </script>
 
