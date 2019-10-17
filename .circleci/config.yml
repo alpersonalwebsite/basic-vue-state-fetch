@@ -30,7 +30,7 @@ workflows:
       - build
       - deploy:
           requires:
-            - build
+            - dist
           filters:
             branches:
               only: master
