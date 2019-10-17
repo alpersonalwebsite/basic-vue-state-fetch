@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <UserList v-bind:users="users" />
+    <UserList v-bind:users="users"
+      v-on:clickUserInList="onClickUserInApp" />
+
+    <div v-if="selectedUser">
+      Selected User: {{ selectedUser }}
+    </div>
   </div>
 </template>
 
@@ -17,7 +22,8 @@ export default {
   },
   data() {
     return {
-      users: []
+      users: [],
+      selectedUser: null
     }
   },
   mounted() {
@@ -31,8 +37,12 @@ export default {
           //console.log(res)
           this.users = res.data
         })
+    },
+    onClickUserInApp(user) {
+      this.selectedUser = user
+      console.log('App')
     }
-  },
+  }
 }
 </script>
 

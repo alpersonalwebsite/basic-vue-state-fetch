@@ -5,6 +5,7 @@
       v-for="user in users"
       v-bind:user="user"
       v-bind:key="user.user_id"
+      v-on:clickUser="onClickUserInList"
      />
   </div> 
 </template>
@@ -19,6 +20,13 @@ export default {
   },
   props: {
     users: Array
+  },
+  methods: {
+    onClickUserInList(user) {
+      this.$emit('clickUserInList', user)
+      const current = new Date()
+      console.log('Emiting from UserList', current.toLocaleTimeString(), current.getMilliseconds())
+    }
   }
 }
 </script>
