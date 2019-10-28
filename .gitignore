@@ -1,6 +1,9 @@
 # dependencies
 /node_modules
 
+# artifact
+/dist
+
 # misc
 .DS_Store
 .env
