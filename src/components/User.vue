@@ -1,6 +1,6 @@
 <template>
   <div v-on:click="onClickUser">
-    {{user.name + ' ' + user.lastname}}
+    <span>{{user.name + ' ' + user.lastname}}</span>
   </div>
 </template>
 
@@ -12,8 +12,9 @@ export default {
   },
   methods: {
     onClickUser() {
-      this.$emit('clickUser', this.user)
+      this.$emit('selectedUser', this.user)
       const current = new Date()
+      // eslint-disable-next-line no-console
       console.log('Emiting from User', current.toLocaleTimeString(), current.getMilliseconds())
     }
   }
@@ -21,5 +22,8 @@ export default {
 </script>
 
 <style scoped>
-
+  span {
+    cursor: pointer;
+    width: auto;
+  }
 </style>
