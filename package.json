@@ -2,7 +2,16 @@
   "name": "basic-vue-state-fetch",
   "version": "1.0.0",
   "description": "Simple example of how to fetch data and set it as state with Vue.js",
-  "keywords": ["vuejs", "vue", "fetch data vue", "state vue", "vue data fetching", "vue fetch data api", "vue fetch", "axios vue"],
+  "keywords": [
+    "vuejs",
+    "vue",
+    "fetch data vue",
+    "state vue",
+    "vue data fetching",
+    "vue fetch data api",
+    "vue fetch",
+    "axios vue"
+  ],
   "main": "src/main.js",
   "scripts": {
     "serve": "vue-cli-service serve",
