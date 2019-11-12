@@ -3,13 +3,21 @@
     <div v-if="!users.length">Loading...</div>
     <div v-else>
       <h2>List of Users: {{users.length}}</h2>
-      <User
+
+      <UserWithEmit
         v-for="user in users"
         v-bind:user="user"
-        v-bind:key="user.user_id"
+        v-bind:key="`emit${user.user_id}`"
         v-on:selectedUser="onClickUserInList"
       />
       <br />
+      <UserWithCallback
+        v-for="user in users"
+        v-bind:user="user"
+        v-bind:key="`callback${user.user_id}`"
+        v-bind:onSelectUserCbF="onSelectUserCb"
+      />
+
     </div>
      <div v-if="selectedUser">
        You selected: {{ selectedUser }}
@@ -21,12 +29,14 @@
 import axios from 'axios'
 import { API, limitQuery, limitUserResults } from '../apiConfiguration'
 
-import User from './User.vue'
+import UserWithEmit from './UserWithEmit.vue'
+import UserWithCallback from './UserWithCallback.vue'
 
 export default {
   name: 'UserList',
   components: {
-    User
+    UserWithEmit,
+    UserWithCallback
   },
   data() {
     return {
@@ -50,6 +60,11 @@ export default {
       this.selectedUser = user
       // eslint-disable-next-line no-console
       console.log('List')
+    },
+    onSelectUserCb(user) {
+      this.selectedUser = user
+      // eslint-disable-next-line no-console
+      console.log('List callback')
     }
   }
 }
