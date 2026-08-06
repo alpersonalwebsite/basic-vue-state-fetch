@@ -83,9 +83,8 @@ export default {
           this.error = err.message
           this.users = []
         })
-        .then(() => {
-          // Runs on both paths, so the spinner always clears. .finally() exists, but
-          // it needs a polyfill on the browsers this repo's browserslist targets.
+        .finally(() => {
+          // Runs on both paths, so the spinner always clears whatever happened.
           this.loading = false
         })
     },
