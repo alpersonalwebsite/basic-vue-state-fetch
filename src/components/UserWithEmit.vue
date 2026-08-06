@@ -1,6 +1,6 @@
 <template>
   <div v-on:click="onClickUser">
-    <span>{{user.name + ' ' + user.lastname}}</span>
+    <span>{{ user.firstname }} {{ user.lastname }}</span>
   </div>
 </template>
 
@@ -8,14 +8,18 @@
 export default {
   name: 'UserWithEmit',
   props: {
-    user: Object
+    // Was `user: Object`, which says "an object" and nothing else. required means a
+    // missing prop is a console warning during development rather than a blank row.
+    user: {
+      type: Object,
+      required: true
+    }
   },
   methods: {
+    // The emit half of the demo: the child announces what happened and the parent
+    // decides what it means. The parent listens with v-on:selectedUser.
     onClickUser() {
       this.$emit('selectedUser', this.user)
-      const current = new Date()
-      // eslint-disable-next-line no-console
-      console.log('Emiting from User', current.toLocaleTimeString(), current.getMilliseconds())
     }
   }
 }
