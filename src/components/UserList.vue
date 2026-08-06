@@ -42,7 +42,7 @@
 
 <script>
 import axios from 'axios'
-import { API, limitQuery, limitUserResults } from '../apiConfiguration'
+import { API, limitUserResults } from '../apiConfiguration'
 
 import UserWithEmit from './UserWithEmit.vue'
 import UserWithCallback from './UserWithCallback.vue'
@@ -74,8 +74,14 @@ export default {
       this.loading = true
       this.error = null
 
+      // params, not `${API}?limit=...`. If VUE_APP_API_URL already carries a query
+      // string, template-literal concatenation produces a second '?' and the server
+      // sees one malformed parameter. axios builds the URL properly: measured against
+      // the pinned 0.19.2, a base of /api/users?tenant=demo becomes
+      // /api/users?tenant=demo&limit=10 with params, and /api/users?tenant=demo?limit=10
+      // by concatenation. It encodes values too, which concatenation does not.
       return axios
-        .get(`${API}?${limitQuery}${limitUserResults}`)
+        .get(API, { params: { limit: limitUserResults } })
         .then(res => {
           this.users = this.readUsers(res.data)
         })
